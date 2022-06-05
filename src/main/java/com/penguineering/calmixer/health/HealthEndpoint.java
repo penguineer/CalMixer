@@ -1,9 +1,12 @@
 package com.penguineering.calmixer.health;
 
+import io.micronaut.http.HttpResponse;
+import io.micronaut.http.HttpStatus;
 import io.micronaut.http.MediaType;
 import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.Get;
 import io.micronaut.http.annotation.Produces;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.inject.Inject;
 import org.json.JSONObject;
 
@@ -17,7 +20,9 @@ public class HealthEndpoint {
 
     @Get
     @Produces(MediaType.APPLICATION_JSON)
-    public String health() {
+    @ApiResponse(responseCode = "200", description = "Service is healthy")
+    @ApiResponse(responseCode = "500", description = "Service is failing")
+    public HttpResponse<String> health() {
         final JSONObject response = new JSONObject();
 
         boolean healthy = true;
@@ -30,6 +35,8 @@ public class HealthEndpoint {
 
         response.put("healthy", healthy);
 
-        return response.toString(2);
+        return HttpResponse
+                .status(healthy ? HttpStatus.OK : HttpStatus.INTERNAL_SERVER_ERROR, null)
+                .body(response.toString(2));
     }
 }
