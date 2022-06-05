@@ -23,10 +23,8 @@ public class HealthTest {
 
         assertNotNull(body);
 
-        final JSONObject expected = new JSONObject();
-        expected.put("healthy", true);
-
         final JSONObject status = new JSONObject(body);
-        assertTrue(status.similar(expected));
+        assertTrue((Boolean) status.query("/healthy"));
+        assertNotNull(status.query("/uptime"));
     }
 }
