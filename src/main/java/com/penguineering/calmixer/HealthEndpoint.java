@@ -30,6 +30,6 @@ public class HealthEndpoint {
 
         response.put("healthy", healthy);
 
-        return response.toString();
+        return response.toString(2);
     }
 }
