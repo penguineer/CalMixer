@@ -94,6 +94,10 @@
       <artifactId>json</artifactId>
       <version>20220320</version>
     </dependency>
+    <dependency>
+      <groupId>io.swagger.core.v3</groupId>
+      <artifactId>swagger-annotations</artifactId>
+    </dependency>
   </dependencies>
 
   <build>
@@ -115,6 +119,11 @@
               <groupId>io.micronaut</groupId>
               <artifactId>micronaut-http-validation</artifactId>
               <version>${micronaut.version}</version>
+            </path>
+            <path>
+              <groupId>io.micronaut.openapi</groupId>
+              <artifactId>micronaut-openapi</artifactId>
+              <version>4.3.0</version>
             </path>
           </annotationProcessorPaths>
           <compilerArgs>
