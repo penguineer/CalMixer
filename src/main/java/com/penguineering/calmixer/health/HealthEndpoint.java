@@ -1,4 +1,4 @@
-package com.penguineering.calmixer;
+package com.penguineering.calmixer.health;
 
 import io.micronaut.http.MediaType;
 import io.micronaut.http.annotation.Controller;

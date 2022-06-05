@@ -1,5 +1,6 @@
-package com.penguineering.calmixer;
+package com.penguineering.calmixer.health;
 
+import com.penguineering.calmixer.health.HealthProvider;
 import jakarta.inject.Singleton;
 
 import java.time.Duration;

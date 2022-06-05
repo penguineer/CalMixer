@@ -1,11 +1,13 @@
-package com.penguineering.calmixer;
+package com.penguineering.calmixer.health;
 
+import com.penguineering.calmixer.Application;
+import com.penguineering.calmixer.health.HealthProvider;
 import jakarta.inject.Singleton;
 
 import java.util.Optional;
 
 @Singleton
-public class VersionHealthProvider implements HealthProvider{
+public class VersionHealthProvider implements HealthProvider {
     private final String version = Application.class.getPackage().getImplementationVersion();
 
     @Override

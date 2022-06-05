@@ -1,4 +1,4 @@
-package com.penguineering.calmixer;
+package com.penguineering.calmixer.health;
 
 import java.util.Map;
 import java.util.Optional;
