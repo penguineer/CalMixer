@@ -1,6 +1,6 @@
 # Calendar Mixer (CalMixer)
 
-> Load two or more calendards and mix them into a single CalDAV source.
+> Load two or more calendars and mix them into a single CalDAV source.
 
 Some tools can only process a single calendar and are unusable when the 
 appointment landscape is determined by multiple calendar sources. This
@@ -16,13 +16,20 @@ Run with Docker:
 docker run --rm -it mrtux/cal-mixer:latest
 ```
 
+The container exposes port 8080 for access to the HTTP endpoint.
+
 ### Development
 
-This project needs [Maven](https://maven.apache.org/) (at least version 3.2.0) for build and dependency management.
+This project uses the [Micronaut Framework](https://micronaut.io/).
 
 Version numbers are determined with [jgitver](https://jgitver.github.io/). 
 Please check your [IDE settings](https://jgitver.github.io/#_ides_usage) to avoid problems, as there are still some unresolved issues.
 If you encounter a project version `0` there is an issue with the jgitver generator.
+
+The application can be run locally with
+```bash
+./mvnw mn:run
+```
 
 ## Build
 
