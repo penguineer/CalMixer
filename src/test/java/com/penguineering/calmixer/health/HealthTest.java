@@ -10,7 +10,6 @@ import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
 
 import java.time.Duration;
-import java.time.Instant;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Optional;
@@ -67,5 +66,25 @@ public class HealthTest {
         }
         // always healthy
         assertTrue(uptimeHealthProvider.isHealthy());
+    }
+
+    @Inject
+    @Named("Timestamp")
+    HealthProvider timestampHealthProvider;
+
+    @Test
+    void testTimestampHealthProvider() {
+        // return correct key
+        assertEquals("timestamp", timestampHealthProvider.getKey());
+        // must return a correct ISO8601 timestamp
+        Optional<Object> timestamp = timestampHealthProvider.getStatus();
+        assertTrue(timestamp.isPresent());
+        try {
+            DateTimeFormatter.ISO_OFFSET_DATE_TIME.parse((String)timestamp.get());
+        } catch (DateTimeParseException e) {
+            fail("Failed to parse timestamp from TimestampHealthProvider: " + timestamp.get());
+        }
+        // always healthy
+        assertTrue(timestampHealthProvider.isHealthy());
     }
 }
