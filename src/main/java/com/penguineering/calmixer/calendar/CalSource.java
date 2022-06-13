@@ -1,4 +1,4 @@
-package com.penguineering.calmixer.session;
+package com.penguineering.calmixer.calendar;
 
 import net.jcip.annotations.Immutable;
 
