@@ -9,9 +9,7 @@ import jakarta.inject.Inject;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.net.MalformedURLException;
 import java.net.URI;
-import java.net.URL;
 
 @Controller("/session")
 public class SessionController {
@@ -37,11 +35,8 @@ public class SessionController {
         final JSONObject json_body;
         try {
             json_body = new JSONObject(body);
-            final URL url = URI.create(json_body.getString("url")).toURL();
-            final String label = json_body.getString("label");
-
-            s.addSource(CalSource.withValues(url, label));
-        } catch (JSONException | MalformedURLException | IllegalArgumentException e) {
+            s.addSource(CalSource.withJson(json_body));
+        } catch (JSONException | IllegalArgumentException e) {
             return HttpResponse.badRequest(e.getMessage());
         }
 
