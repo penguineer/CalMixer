@@ -7,6 +7,54 @@ appointment landscape is determined by multiple calendar sources. This
 tool will dynamically load these calendars and convert them into a single,
 up tp date source that can be used for further processing.
 
+## API
+
+Please note: The API is still preliminary and may change heavily!
+
+The following examples use two shell variables:
+```bash
+SERVICE="service URL"
+TOKEN="Session Token"
+```
+
+### Creating a session
+
+Until authentication is implemented, sessions identify calendars and are used to assign sources.
+
+A session can be created by a POST call to `/session/create`:
+```bash
+curl -i -X POST "$SERVICE/session/create"
+```
+
+The result will be in the `location` header.
+
+### Session information
+
+The retrieve session information, issue a GET call to the location provided by the create-call: `/session/{token}`:
+
+```bash
+curl -i "$SERVICE/session/$TOKEN"
+```
+
+### Adding sources
+
+A source configuration consists of:
+* `label`: A label for the source. While there are no limitations imposed, simple labels will make life easier downstream.
+* `url`: The URL of the calendar source
+* `protocol`: The access protocol (`http` or `dav`) - defaults to `http` if not provided
+* `token`: A bearer token for DAV authentication
+* `user`, `password`: Credentials for HTTP or DAV authentication (note that none or both must be provided)
+
+The parameters `token` or `user`/`password` are optional. In this case no authentication is used.
+If all parameters are provided, it is up to the implementation to decide which authentication to use.
+
+Store these parameters in a JSON object and send it as body with a POST to `/session/{token}/source`, for example:
+```bash
+$CURL -X POST --data '{ "url": "http://localhost:8080/cal/123", "label": "test" }' \
+              -H "Content-type: application/json" \
+              "${SERVICE}/session/${token}/source"
+```
+
 ## Deployment
 
 ### with Docker
