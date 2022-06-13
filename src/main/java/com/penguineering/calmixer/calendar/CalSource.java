@@ -1,8 +1,10 @@
 package com.penguineering.calmixer.calendar;
 
 import net.jcip.annotations.Immutable;
+import org.json.JSONObject;
 
 import java.net.URL;
+import java.util.Map;
 
 @Immutable
 public class CalSource {
@@ -24,5 +26,12 @@ public class CalSource {
 
     public String getLabel() {
         return label;
+    }
+
+    public JSONObject toJson() {
+        return new JSONObject(Map.of(
+                "url", url,
+                "label", label
+        ));
     }
 }
